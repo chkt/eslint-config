@@ -7,14 +7,14 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended-requiring-type-checking'
 	],
 	rules : {
-		'array-bracket-newline' : [ 'error', { minItems : 4 }],
+		'array-bracket-newline' : [ 'error', 'consistent' ],
 		'array-bracket-spacing' : [ 'error', 'always', {
 			singleValue : true,
 			objectsInArrays : false,
 			arraysInArrays : false
 		}],
 		'array-element-newline' : [ 'error', {
-			ArrayExpression : { multiline : true, minItems : 4 },
+			ArrayExpression : 'consistent',
 			ArrayPattern : 'never'
 		}],
 		'array-callback-return' : [ 'error', { allowImplicit : false, checkForEach : false }],
@@ -165,16 +165,15 @@ module.exports = {
 				trailingUnderscore : 'forbid'
 			},
 			{ selector : 'variable', modifiers : [ 'const', 'global' ], format : [ 'strictCamelCase', 'UPPER_CASE' ]},
-			{
-				selector : 'variable',
-				modifiers : [ 'destructured' ],
-				format : [ 'strictCamelCase' ],
-				leadingUnderscore : 'allow'
-			},
-			{ selector : 'function', format : [ 'StrictPascalCase', 'strictCamelCase' ]},
 			{ selector : 'interface', format : [ 'StrictPascalCase' ]},
 			{ selector : 'typeAlias', format : [ 'StrictPascalCase', 'strictCamelCase' ]},
-			{ selector : 'typeParameter', format : [ 'StrictPascalCase' ]}
+			{ selector : 'typeParameter', format : [ 'StrictPascalCase' ]},
+			{
+				selector: 'ObjectLiteralProperty',
+				modifiers: [ 'public' ],
+				filter: { regex : '^toJSON$', match : true },
+				format : [ 'strictCamelCase' ]
+			}
 		],
 		// unwanted - only oop relevant
 		'new-cap' : 'off',
@@ -187,14 +186,16 @@ module.exports = {
 		'no-bitwise' : 'error',
 		'no-caller' : 'error',
 		'@typescript-eslint/no-confusing-non-null-assertion' : 'error',
-		'no-confusing-arrow' : [ 'error', { allowParens : true }],
+		// using code ligatures
+		'no-confusing-arrow' : 'off',
 		'@typescript-eslint/no-confusing-void-expression' : [ 'error', {
-			ignoreArrowShorthand : false,
-			ignoreVoidOperator : true
+			ignoreArrowShorthand : true,
+			ignoreVoidOperator : false
 		}],
 		'no-console' : 'error',
 		// unwanted - disallows function flattening
 		'no-continue' : 'off',
+		'no-constant-condition' : [ 'error', { checkLoops: false }],
 		'no-constructor-return' : 'error',
 		// using space-infix-ops
 		'no-div-regex' : 'off',
@@ -221,7 +222,16 @@ module.exports = {
 		'no-extra-bind' : 'error',
 		'no-extra-label' : 'error',
 		'no-extra-parens' : 'off',
-		'@typescript-eslint/no-extra-parens' : 'error',
+		'@typescript-eslint/no-extra-parens' : [ 'error', 'all', {
+			conditionalAssign : true,
+			returnAssign : true,
+			nestedBinaryExpressions : false,
+			ignoreJSX : 'none',
+			enforceForArrowConditionals : true,
+			enforceForSequenceExpressions : true,
+			enforceForNewInMemberExpressions : true,
+			enforceForFunctionPrototypeMethods : true
+		}],
 		'@typescript-eslint/no-extraneous-class' : 'error',
 		'no-floating-decimal' : 'error',
 		'no-implicit-coercion' : [ 'error', {
@@ -247,7 +257,7 @@ module.exports = {
 		'@typescript-eslint/no-loop-func' : 'warn',
 		'no-magic-numbers' : 'off',
 		'@typescript-eslint/no-magic-numbers' : [ 'warn', {
-			ignore : [ -1, 0 ],
+			ignore : [ -1, 0, 1 ],
 			ignoreArrayIndexes : true,
 			ignoreDefaultValues : false,
 			ignoreEnums : true,
@@ -274,7 +284,7 @@ module.exports = {
 		'@typescript-eslint/no-non-null-asserted-nullish-coalescing' : 'error',
 		'no-octal' : 'error',
 		'no-octal-escape' : 'error',
-		'no-param-reassign' : 'error',
+		'no-param-reassign' : 'warn',
 		// '@typescript-eslint/no-parameter-properties' : 'off',
 		'no-plusplus' : 'error',
 		'no-promise-executor-return' : 'error',
@@ -352,9 +362,15 @@ module.exports = {
 		// enforced externally
 		'no-warning-comments' : 'off',
 		'no-whitespace-before-property' : 'error',
-		'@typescript-eslint/non-nullable-type-assertion-style' : 'warn',
+		// using no-non-null-assertion
+		'@typescript-eslint/non-nullable-type-assertion-style' : 'off',
 		'nonblock-statement-body-position' : [ 'error', 'beside' ],
-		'object-curly-newline' : [ 'error', { multiline : true }],
+		'object-curly-newline' : [ 'error', {
+			ObjectExpression : { consistent : true },
+			ObjectPattern : { consistent : true },
+			ImportDeclaration : { multiline : true },
+			ExportDeclaration : { multiline : true }
+		}],
 		'object-curly-spacing' : 'off',
 		'@typescript-eslint/object-curly-spacing' : [ 'warn', 'always', {
 			arraysInObjects : true,
@@ -390,7 +406,7 @@ module.exports = {
 		'@typescript-eslint/prefer-literal-enum-member' : 'warn',
 		// unwanted - disallows destructuring
 		'prefer-named-capture-group' : 'off',
-		 // unwanted - disallows all Number.parseInt() for very specific purpose
+		// unwanted - disallows all Number.parseInt() for very specific purpose
 		'prefer-numeric-literals' : 'off',
 		'@typescript-eslint/prefer-nullish-coalescing' : 'error',
 		// requires es2022 support, currently (202202) no typescript support
@@ -410,13 +426,17 @@ module.exports = {
 		'prefer-template' : 'error',
 		'@typescript-eslint/prefer-string-starts-ends-with' : 'error',
 		'@typescript-eslint/prefer-ts-expect-error' : 'error',
-		'@typescript-eslint/promise-function-async' : 'error',
+		// potentially unwanted - disallows wrapping promise yielding functions
+		// using no-floating-promises, no-misused-promises
+		'@typescript-eslint/promise-function-async' : 'warn',
 		'quote-props' : [ 'error', 'as-needed' ],
 		'quotes' : 'off',
 		'@typescript-eslint/quotes' : [ 'error', 'single', { avoidEscape : true, allowTemplateLiterals : true }],
 		'radix' : 'error',
 		'@typescript-eslint/require-array-sort-compare' : 'error',
 		'require-atomic-updates' : 'error',
+		// potentially unwanted - disallows coercing return values into promises
+		'require-await': 'warn',
 		// unwanted - disallows performant parsing of guaranteed ascii
 		'require-unicode-regexp' : 'off',
 		'@typescript-eslint/restrict-plus-operands' : [ 'error', {
