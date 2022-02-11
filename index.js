@@ -384,6 +384,7 @@ module.exports = {
 		'operator-linebreak' : [ 'error', 'after' ],
 		'padded-blocks' : [ 'error', 'never' ],
 		'padding-line-between-statements' : 'off',
+		// Bug: import statements of style 'import ReadOnlyDict = NodeJS.ReadOnlyDict' are not treated as imports
 		'@typescript-eslint/padding-line-between-statements' : [
 			'warn',
 			{ prev : '*', next : '*', blankLine : 'always' },
@@ -435,8 +436,9 @@ module.exports = {
 		'radix' : 'error',
 		'@typescript-eslint/require-array-sort-compare' : 'error',
 		'require-atomic-updates' : 'error',
+		'require-await': 'off',
 		// potentially unwanted - disallows coercing return values into promises
-		'require-await': 'warn',
+		'@typescript-eslint/require-await' : 'warn',
 		// unwanted - disallows performant parsing of guaranteed ascii
 		'require-unicode-regexp' : 'off',
 		'@typescript-eslint/restrict-plus-operands' : [ 'error', {
