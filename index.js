@@ -169,10 +169,10 @@ module.exports = {
 			{ selector : 'typeAlias', format : [ 'StrictPascalCase', 'strictCamelCase' ]},
 			{ selector : 'typeParameter', format : [ 'StrictPascalCase' ]},
 			{
-				selector: 'ObjectLiteralProperty',
-				modifiers: [ 'public' ],
-				filter: { regex : '^toJSON$', match : true },
-				format : [ 'strictCamelCase' ]
+				selector : 'objectLiteralProperty',
+				modifiers : [ 'public' ],
+				filter : { regex : '^toJSON$', match : true },
+				format  : [ 'strictCamelCase' ]
 			}
 		],
 		// unwanted - only oop relevant
