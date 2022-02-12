@@ -52,7 +52,9 @@ module.exports = {
 		'complexity' : 'off',
 		'computed-property-spacing' : [ 'error', 'never' ],
 		'@typescript-eslint/consistent-indexed-object-style' : [ 'warn', 'record' ],
-		'consistent-return' : [ 'error', { treatUndefinedAsUnspecified : false }],
+		// Bug: treatUndefinedAsUnspecified only considers the undefined literal, not expressions evaluating to undefined
+		// Bug: triggers for mixes of expressions returning undefined and undefined literals with treatUndefinedAsUnspecified=true
+		'consistent-return' : [ 'warn', { treatUndefinedAsUnspecified : true }],
 		// using no-this-alias
 		'consistent-this' : 'off',
 		'@typescript-eslint/consistent-type-assertions' : [ 'warn', {
@@ -112,7 +114,8 @@ module.exports = {
 		'id-length' : 'off',
 		// using naming-convention
 		'id-match' : 'off',
-		'implicit-arrow-linebreak' : [ 'error', 'beside' ],
+		// potentially unwanted - disallows multiline arrow function expressions
+		'implicit-arrow-linebreak' : [ 'warn', 'beside' ],
 		// considered broken
 		'indent' : 'off',
 		'@typescript-eslint/indent' : 'off',
@@ -153,7 +156,9 @@ module.exports = {
 			multilineDetection : 'brackets'
 		}],
 		// '@typescript-eslint/member-ordering' : 'off',
-		'@typescript-eslint/method-signature-style' : [ 'error', 'method' ],
+		// using unbound-method
+		// potentially unwanted - disallows passing callbacks in settings objects
+		'@typescript-eslint/method-signature-style' : [ 'warn', 'method' ],
 		'multiline-comment-style' : [ 'error', 'separate-lines' ],
 		'multiline-ternary' : [ 'error', 'always-multiline' ],
 		'@typescript-eslint/naming-convention' : [
@@ -167,13 +172,7 @@ module.exports = {
 			{ selector : 'variable', modifiers : [ 'const', 'global' ], format : [ 'strictCamelCase', 'UPPER_CASE' ]},
 			{ selector : 'interface', format : [ 'StrictPascalCase' ]},
 			{ selector : 'typeAlias', format : [ 'StrictPascalCase', 'strictCamelCase' ]},
-			{ selector : 'typeParameter', format : [ 'StrictPascalCase' ]},
-			{
-				selector : 'objectLiteralProperty',
-				modifiers : [ 'public' ],
-				filter : { regex : '^toJSON$', match : true },
-				format  : [ 'strictCamelCase' ]
-			}
+			{ selector : 'typeParameter', format : [ 'StrictPascalCase' ]}
 		],
 		// unwanted - only oop relevant
 		'new-cap' : 'off',
@@ -188,7 +187,9 @@ module.exports = {
 		'@typescript-eslint/no-confusing-non-null-assertion' : 'error',
 		// using code ligatures
 		'no-confusing-arrow' : 'off',
-		'@typescript-eslint/no-confusing-void-expression' : [ 'error', {
+		// using no-meaningless-void-operator
+		// potentially unwanted - disallows returning after rejecting in promise executors
+		'@typescript-eslint/no-confusing-void-expression' : [ 'warn', {
 			ignoreArrowShorthand : true,
 			ignoreVoidOperator : false
 		}],
@@ -299,6 +300,7 @@ module.exports = {
 		'no-self-compare' : 'error',
 		'no-sequences' : 'error',
 		'no-shadow' : 'off',
+		// Bug: Flags enum members with same name as variables
 		'@typescript-eslint/no-shadow' : [ 'error', {
 			builtinGlobals : true,
 			ignoreTypeValueShadow : true,
@@ -326,6 +328,7 @@ module.exports = {
 		// using naming-convention
 		'no-underscore-dangle' : 'off',
 		'@typescript-eslint/no-unnecessary-boolean-literal-compare' : 'error',
+		// Bug: seriously incompetent when handling the null-coalescing chain operator ?.
 		'@typescript-eslint/no-unnecessary-condition' : [ 'error', { allowConstantLoopConditions : true } ],
 		'@typescript-eslint/no-unnecessary-qualifier' : 'error',
 		'@typescript-eslint/no-unnecessary-type-arguments' : 'error',
@@ -396,7 +399,7 @@ module.exports = {
 			{ prev : [ 'case', 'default' ], next : [ 'case', 'default' ], blankLine : 'never' }
 		],
 		'prefer-arrow-callback' : 'error',
-		'prefer-const' : [ 'error', { destructuring : 'all', ignoreReadBeforeAssign : false } ],
+		'prefer-const' : [ 'error', { destructuring : 'all', ignoreReadBeforeAssign : true } ],
 		// unwanted - disallows int enums
 		'@typescript-eslint/prefer-enum-initializers' : 'off',
 		// 'prefer-destructuring' : 'off',
@@ -437,8 +440,8 @@ module.exports = {
 		'@typescript-eslint/require-array-sort-compare' : 'error',
 		'require-atomic-updates' : 'error',
 		'require-await': 'off',
-		// potentially unwanted - disallows coercing return values into promises
-		'@typescript-eslint/require-await' : 'warn',
+		// unwanted - disallows casting return values into promises
+		'@typescript-eslint/require-await' : 'off',
 		// unwanted - disallows performant parsing of guaranteed ascii
 		'require-unicode-regexp' : 'off',
 		'@typescript-eslint/restrict-plus-operands' : [ 'error', {
@@ -483,7 +486,7 @@ module.exports = {
 		'symbol-description' : 'warn',
 		'template-curly-spacing' : [ 'error', 'always' ],
 		'template-tag-spacing' : [ 'error', 'never' ],
-		// Bug; property will not affect map type aliases
+		// Bug: property will not affect map type aliases
 		// Bug: parameter will not affect parameters with default
 		// '@typescript-eslint/type-annotation-spacing' : [ 'error', {
 		// 	before : false,
@@ -496,8 +499,10 @@ module.exports = {
 		// 		variable : { before : true, after : true }
 		// 	}
 		// }],
-		// unwanted - disallows type inferrence
+		// unwanted - disallows type inference
 		'@typescript-eslint/typedef' : 'off',
+		// potentially unwanted - disallows bindable function arguments
+		'@typescript-eslint/unbound-method' : 'warn',
 		// enforced externally
 		'unicode-bom' : 'off',
 		'@typescript-eslint/unified-signatures' : 'warn',
