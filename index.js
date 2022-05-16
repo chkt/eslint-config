@@ -54,7 +54,7 @@ module.exports = {
 		'@typescript-eslint/consistent-indexed-object-style' : [ 'warn', 'record' ],
 		// Bug: treatUndefinedAsUnspecified only considers the undefined literal, not expressions evaluating to undefined
 		// Bug: triggers for mixes of expressions returning undefined and undefined literals with treatUndefinedAsUnspecified=true
-		'consistent-return' : [ 'warn', { treatUndefinedAsUnspecified : true }],
+		'consistent-return' : [ 'warn', { treatUndefinedAsUnspecified : false }],
 		// using no-this-alias
 		'consistent-this' : 'off',
 		'@typescript-eslint/consistent-type-assertions' : [ 'warn', {
@@ -169,10 +169,9 @@ module.exports = {
 				leadingUnderscore : 'forbid',
 				trailingUnderscore : 'forbid'
 			},
-			{ selector : 'variable', modifiers : [ 'const', 'global' ], format : [ 'strictCamelCase', 'UPPER_CASE' ]},
-			{ selector : 'interface', format : [ 'StrictPascalCase' ]},
-			{ selector : 'typeAlias', format : [ 'StrictPascalCase', 'strictCamelCase' ]},
-			{ selector : 'typeParameter', format : [ 'StrictPascalCase' ]}
+			{ selector : 'variable', modifiers : [ 'const' ], format : [ 'strictCamelCase', 'UPPER_CASE' ]},
+			{ selector : [ 'class', 'interface', 'typeParameter' ], format : [ 'StrictPascalCase' ]},
+			{ selector : ['function', 'typeAlias'], format : [ 'StrictPascalCase', 'strictCamelCase' ]},
 		],
 		// unwanted - only oop relevant
 		'new-cap' : 'off',
@@ -375,7 +374,7 @@ module.exports = {
 			ExportDeclaration : { multiline : true }
 		}],
 		'object-curly-spacing' : 'off',
-		'@typescript-eslint/object-curly-spacing' : [ 'warn', 'always', {
+		'@typescript-eslint/object-curly-spacing' : [ 'error', 'always', {
 			arraysInObjects : true,
 			objectsInObjects : false
 		}],
