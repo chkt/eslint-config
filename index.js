@@ -251,7 +251,7 @@ module.exports = {
 		'no-iterator' : 'error',
 		'no-label-var' : 'error',
 		'no-labels' : 'error',
-		'no-lone-blocks' : 'error',
+		'no-lone-blocks' : 'warn',
 		'no-lonely-if' : 'error',
 		'no-loop-func ': 'off',
 		'@typescript-eslint/no-loop-func' : 'warn',
@@ -444,8 +444,10 @@ module.exports = {
 		// unwanted - disallows performant parsing of guaranteed ascii
 		'require-unicode-regexp' : 'off',
 		'@typescript-eslint/restrict-plus-operands' : [ 'error', {
-			checkCompoundAssignments : true,
-			allowAny : false
+			allowAny : false,
+			allowNullish : false,
+			allowNumberAndString : false,
+			allowRegExp : false
 		}],
 		'no-return-await' : 'off',
 		'@typescript-eslint/return-await' : [ 'error', 'in-try-catch' ],
