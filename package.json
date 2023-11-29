@@ -1,6 +1,6 @@
 {
 	"name": "@chkt/eslint-config",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "typescript-eslint configuration rules",
 	"author": {
 		"name": "chkt",
@@ -12,5 +12,8 @@
 	"peerDependencies": {
 		"@typescript-eslint/eslint-plugin": ">=6",
 		"eslint": ">=8"
+	},
+	"dependencies": {
+		"eslint-plugin-import" : "^2.29"
 	}
 }

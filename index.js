@@ -202,7 +202,7 @@ module.exports = {
 		'no-dupe-class-members' : 'off',
 		'@typescript-eslint/no-dupe-class-members' : 'error',
 		'no-duplicate-imports' : 'off',
-		'@typescript-eslint/no-duplicate-imports' : 'error',
+		'import/no-duplicates' : [ 'error', { 'prefer-inline' : true }],
 		'no-dynamic-delete' : 'off',
 		'@typescript-eslint/no-dynamic-delete' : 'error',
 		// unwanted - disallows logic symmetry
