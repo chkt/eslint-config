@@ -3,6 +3,8 @@
 module.exports = {
 	extends : [
 		'eslint:recommended',
+		'plugin:import/recommended',
+		'plugin:import/typescript',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:@typescript-eslint/recommended-requiring-type-checking'
 	],
@@ -79,6 +81,13 @@ module.exports = {
 		}],
 		'eol-last' : [ 'error', 'always' ],
 		'eqeqeq' : 'error',
+		'import/extensions' : [ 'error', 'always', {
+			'js' : 'never',
+			'jsx' : 'never',
+			'ts' : 'never',
+			'tsx' : 'never'
+		}],
+		'import/first' : 'error',
 		// unwanted
 		'func-name-matching' : 'off',
 		'@typescript-eslint/explicit-function-return-type' : [ 'error', {
@@ -137,6 +146,7 @@ module.exports = {
 		}],
 		// unwanted - only oop relevant
 		'max-classes-per-file' : 'off',
+		'import/max-dependencies' : [ 'warn', { max : 10 }],
 		'max-depth' : [ 'warn', 4 ],
 		'max-len' : [ 'warn', 120 ],
 		// unwanted - not enforcing complexity rules
@@ -177,12 +187,21 @@ module.exports = {
 		'new-cap' : 'off',
 		'new-parens' : [ 'error', 'always' ],
 		// 'newline-per-chained-call' : 'off',
+		'import/newline-after-import' : [ 'error', {
+			count : 2,
+			exactCount : true,
+			considerComments : true
+		}],
+		'import/no-absolute-path' : 'error',
+		'import/no-amd' : 'error',
+		'import/no-anonymous-default-export' : 'error',
 		'no-alert' : 'error',
 		'no-array-constructor' : 'error',
 		'no-await-in-loop' : 'warn',
 		'@typescript-eslint/no-base-to-string' : 'error',
 		'no-bitwise' : 'error',
 		'no-caller' : 'error',
+		'import/no-commonjs' : 'error',
 		'@typescript-eslint/no-confusing-non-null-assertion' : 'error',
 		// using code ligatures
 		'no-confusing-arrow' : 'off',
@@ -197,6 +216,7 @@ module.exports = {
 		'no-continue' : 'off',
 		'no-constant-condition' : [ 'error', { checkLoops: false }],
 		'no-constructor-return' : 'error',
+		'import/no-cycle' : [ 'warn', { 'ignoreExternal' : true }],
 		// using space-infix-ops
 		'no-div-regex' : 'off',
 		'no-dupe-class-members' : 'off',
@@ -205,6 +225,8 @@ module.exports = {
 		'import/no-duplicates' : [ 'error', { 'prefer-inline' : true }],
 		'no-dynamic-delete' : 'off',
 		'@typescript-eslint/no-dynamic-delete' : 'error',
+		'import/no-dynamic-require' : 'error',
+		'import/no-deprecated' : 'warn',
 		// unwanted - disallows logic symmetry
 		'no-else-return' : 'off',
 		'no-empty-function' : 'off',
@@ -214,6 +236,7 @@ module.exports = {
 			'decoratedFunctions'
 		] }],
 		'@typescript-eslint/no-empty-interface' : [ 'error', { allowSingleExtends : true }],
+		'import/no-empty-named-blocks' : 'error',
 		// using eqeqeq
 		'no-eq-null': 'off',
 		'no-eval' : 'error',
@@ -233,6 +256,7 @@ module.exports = {
 			enforceForFunctionPrototypeMethods : true
 		}],
 		'@typescript-eslint/no-extraneous-class' : 'error',
+		'import/no-extraneous-dependencies' : 'error',
 		'no-floating-decimal' : 'error',
 		'no-implicit-coercion' : [ 'error', {
 			boolean : true,
@@ -241,9 +265,12 @@ module.exports = {
 			disallowTemplateShorthand : false
 		}],
 		'no-implicit-globals' : 'error',
+		'import/no-import-module-exports' : 'error',
 		'@typescript-eslint/no-inferrable-types' : [ 'error', { ignoreParameters : true, ignoreProperties : true } ],
 		// unwanted - avoiding comments
 		'no-inline-comments' : 'off',
+		// unwanted - disallows resolving patterns like fs/promises
+		'import/no-internal-modules' : 'off',
 		// unwanted - disallows function binding
 		'no-invalid-this' : 'off',
 		'@typescript-eslint/no-invalid-this' : 'warn',
@@ -274,6 +301,7 @@ module.exports = {
 		'no-multi-spaces' : [ 'error', { ignoreEOLComments : true } ],
 		'no-multi-str' : 'error',
 		'no-multiple-empty-lines' : [ 'error', { max: 2, maxEOF : 1, maxBOF : 0 }],
+		'import/no-mutable-exports' : 'error',
 		// unwanted - disallows priority paths
 		'no-negated-condition' : 'off',
 		'no-nested-ternary' : 'error',
@@ -292,9 +320,14 @@ module.exports = {
 		'no-redeclare' : 'off',
 		// Bug: treats type aliases and functions with same name as redeclarations
 		// '@typescript-eslint/no-redeclare' : [ 'error', { builtinGlobals : true, ignoreDeclarationMerge : true } ],
+		// unwanted - disallows importing code from submodules
+		'import/no-relative-packages' : 'off',
+		// unwanted - only viable with dependency injection
+		'import/no-relative-parent-imports' : 'off',
 		'@typescript-eslint/no-require-imports' : 'error',
 		// 'no-restricted-syntax' : 'off',
 		'no-return-assign' : 'error',
+		'import/no-self-import' : 'error',
 		'no-script-url' : 'error',
 		'no-self-compare' : 'error',
 		'no-sequences' : 'error',
@@ -320,6 +353,7 @@ module.exports = {
 		'no-trailing-spaces' : 'error',
 		// unwanted - using type aliases
 		'@typescript-eslint/no-type-alias' : 'off',
+		'import/no-unassigned-import' : 'error',
 		'no-undef-init' : 'warn',
 		// unwanted - handling undefined becomes painful
 		'no-undefined' : 'off',
@@ -340,6 +374,10 @@ module.exports = {
 			allowTaggedTemplates : false,
 			enforceForJSX : false
 		}],
+		'import/no-unused-modules' : [ 'warn', {
+			missingExports : true,
+			unusedExports : true
+		}],
 		'no-unused-private-class-members' : 'error',
 		'@typescript-eslint/no-unused-vars' : 'error',
 		'no-use-before-define' : 'off',
@@ -356,6 +394,9 @@ module.exports = {
 		'no-useless-constructor' : 'off',
 		'@typescript-eslint/no-useless-constructor' : 'error',
 		'no-useless-escape' : 'error',
+		'import/no-useless-path-segments' : [ 'error', {
+			noUselessIndex : true
+		}],
 		'no-useless-rename' : 'error',
 		'no-useless-return' : 'error',
 		'no-var' : 'error',
@@ -363,6 +404,7 @@ module.exports = {
 		'no-void' : 'off',
 		// enforced externally
 		'no-warning-comments' : 'off',
+		'import/no-webpack-loader-syntax' : 'error',
 		'no-whitespace-before-property' : 'error',
 		// using no-non-null-assertion
 		'@typescript-eslint/non-nullable-type-assertion-style' : 'off',
@@ -384,6 +426,11 @@ module.exports = {
 		// 'one-var-declaration-per-line' : 'off',
 		'operator-assignment' : 'warn',
 		'operator-linebreak' : [ 'error', 'after' ],
+		'import/order' : [ 'error', {
+			'newlines-between' : 'never',
+			alphabetize : { order : 'asc', orderImportKind : 'asc' },
+			warnOnUnassignedImports : true
+		} ],
 		'padded-blocks' : [ 'error', 'never' ],
 		'padding-line-between-statements' : 'off',
 		// Bug: import statements of style 'import ReadOnlyDict = NodeJS.ReadOnlyDict' are not treated as imports
@@ -399,6 +446,7 @@ module.exports = {
 		],
 		'prefer-arrow-callback' : 'error',
 		'prefer-const' : [ 'error', { destructuring : 'all', ignoreReadBeforeAssign : true } ],
+		'import/prefer-default-export' : 'warn',
 		// unwanted - disallows int enums
 		'@typescript-eslint/prefer-enum-initializers' : 'off',
 		// 'prefer-destructuring' : 'off',
@@ -502,6 +550,7 @@ module.exports = {
 		// }],
 		// unwanted - disallows type inference
 		'@typescript-eslint/typedef' : 'off',
+		'import/unambiguous' : 'warn',
 		// potentially unwanted - disallows bindable function arguments
 		'@typescript-eslint/unbound-method' : 'warn',
 		// enforced externally
