@@ -1,0 +1,26 @@
+{
+	"include" : [
+		"./test/**/*.ts"
+	],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "./dist",
+
+		"target": "es2020",
+		"lib": [ "es2022", "dom" ],
+		"module": "commonjs",
+		"newLine": "LF",
+
+		"sourceMap": false,
+		"declaration": true,
+
+		"allowImportingTsExtensions": true,
+		"exactOptionalPropertyTypes": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+
+		"strict": true,
+		"removeComments": false
+	},
+	"compileOnSave": false
+}
