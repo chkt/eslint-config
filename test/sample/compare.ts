@@ -102,6 +102,11 @@ export function noUnnecessaryConditionBad(v:number) : number {
 	else return 0;
 }
 
+export function strictBooleanExpressionsGood(v?:object) : number {
+	if (v) return 0;
+	else return 1;
+}
+
 export function strictBooleanExpressionsBad(v?:boolean) : number {
 	if (v) return 0;
 	else return 1;

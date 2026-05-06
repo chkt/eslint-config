@@ -1,4 +1,4 @@
-require('/dependencies/dependencies.ts');
+require('/dependencies/dependencies.js');
 
 
 module.exports = {

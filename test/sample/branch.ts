@@ -108,6 +108,14 @@ export function noUnneededTernaryBad(v:boolean) : boolean {
 	return v ? true : false;
 }
 
+export function noUnncessaryConditionUgly(v:number) : boolean {
+	function isNumber(value:unknown) : value is number {
+		return typeof value === 'number';
+	}
+
+	return isNumber(v);
+}
+
 export function noUnnecessaryConditionBad(v:number[]) : boolean {
 	if (v !== null) return true;
 	else return false;

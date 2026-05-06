@@ -98,11 +98,17 @@ export function methodSignatureStyleUgly(fn:() => number) : number {
 	return foo({ foo : fn });
 }
 
-export function namingConventionGood(_v:number) : undefined {
+export function namingConventionGoodParam(_v:number) : undefined {
 	return undefined;
 }
 
-export function naming_conventionBad(V:number) : number {
+export function namingConventionGoodDestructuring(v:string[]) : string {
+	const [ _foo, baz, bar ] = v;
+
+	return bar;
+}
+
+export function namingConventionBad(V:number) : number {
 	const Foo = V;
 
 	return Foo;

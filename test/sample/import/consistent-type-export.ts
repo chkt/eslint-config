@@ -24,6 +24,6 @@ export {
 	type SomeType as ExternalTypeExportBad,
 	notDefault as externalConstExportGood,
 	sideFx as externalFunctionExportGood
-} from './dependencies/dependencies.ts';
-export * as externalAllExportGood from './dependencies/defaultless.ts';
-export { TypeDefinition as TypeDefinitionBad } from './dependencies/definitionsOnly.d.ts';
+} from './dependencies/dependencies.js';
+export * as externalAllExportGood from './dependencies/defaultless.js';
+export type { TypeDefinition as TypeDefinitionBad } from './dependencies/definitionsOnly.d.ts';

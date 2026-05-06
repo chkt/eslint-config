@@ -1,5 +1,5 @@
-import { TypeDefinition as TypeDefinitionBad } from './dependencies/definitionsOnly.d.ts';
-import { type SomeType as SomeTypeBad } from './dependencies/dependencies.ts';
+import type { TypeDefinition as TypeDefinitionBad } from './dependencies/definitionsOnly.d.ts';
+import { type SomeType as SomeTypeBad } from './dependencies/dependencies.js';
 
 
 export function fn() : SomeTypeBad {

@@ -1,4 +1,4 @@
-import {} from './dependencies/dependencies.ts';
+import {} from './dependencies/dependencies.js';
 
 
 export function fn() : void {

@@ -8,18 +8,18 @@
 
 		"target": "es2020",
 		"lib": [ "es2022", "dom" ],
-		"module": "commonjs",
-		"newLine": "LF",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"allowImportingTsExtensions": false,
 
+		"newLine": "LF",
 		"sourceMap": false,
 		"declaration": true,
 
-		"allowImportingTsExtensions": true,
-		"exactOptionalPropertyTypes": true,
+		"strict": true,
+		"exactOptionalPropertyTypes": false,
 		"noImplicitReturns": true,
 		"noPropertyAccessFromIndexSignature": true,
-
-		"strict": true,
 		"removeComments": false
 	},
 	"compileOnSave": false

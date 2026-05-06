@@ -1,4 +1,4 @@
-import doesNotExist from './doesNotExist.ts';
+import doesNotExist from './doesNotExist.js';
 
 
 export function fn() : unknown {

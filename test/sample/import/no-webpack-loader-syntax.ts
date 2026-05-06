@@ -1,4 +1,4 @@
-import { sideFx } from './dependencies/foo.ts!sideFx';
+import { sideFx } from './dependencies/foo.js!sideFx';
 
 
 export function fn(v:number) : number {

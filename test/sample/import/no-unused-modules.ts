@@ -1,4 +1,4 @@
-import { sideFx } from './dependencies/dependencies.ts';
+import { sideFx } from './dependencies/dependencies.js';
 
 
 sideFx();

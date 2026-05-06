@@ -1,4 +1,4 @@
-import notDefault from './dependencies/dependencies.ts';
+import notDefault from './dependencies/dependencies.js';
 
 
 export function fn() : string {

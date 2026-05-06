@@ -422,11 +422,12 @@ export default [
 					leadingUnderscore: 'forbid',
 					trailingUnderscore: 'forbid'
 				},
-				{selector: 'variable', modifiers: ['const'], format: ['strictCamelCase', 'UPPER_CASE']},
-				{selector: ['class', 'interface', 'typeParameter'], format: ['StrictPascalCase']},
-				{selector: ['enum'], format: ['StrictPascalCase']},
-				{selector: ['function', 'typeAlias'], format: ['StrictPascalCase', 'strictCamelCase']},
-				{selector: 'parameter', format: ['strictCamelCase'], leadingUnderscore: 'allow' }
+				{ selector: 'variable', modifiers: ['const'], format: ['strictCamelCase', 'UPPER_CASE'] },
+				{ selector: 'variable', modifiers: ['unused'], format: ['strictCamelCase'], leadingUnderscore: 'require' },
+				{ selector: ['class', 'interface', 'typeParameter'], format: ['StrictPascalCase'] },
+				{ selector: ['enum'], format: ['StrictPascalCase'] },
+				{ selector: ['function', 'typeAlias'], format: ['StrictPascalCase', 'strictCamelCase'] },
+				{ selector: ['parameter'], modifiers: ['unused'], format: ['strictCamelCase'], leadingUnderscore: 'require' }
 			],
 			// unwanted - disallowing 'new Array<T>()' syntax
 			// unwanted - not flagging new Array(...args) syntax
@@ -521,7 +522,8 @@ export default [
 			'@typescript-eslint/no-unnecessary-boolean-literal-compare' : 'error',
 			'@typescript-eslint/no-unnecessary-condition': ['error', {
 				allowConstantLoopConditions: true,
-				checkTypePredicates: true
+				// checkTypePredicates flags many test assertions
+				checkTypePredicates: false
 			}],
 			'@typescript-eslint/no-unnecessary-parameter-property-assignment': 'error',
 			// using @typescript-eslint/prefer-literal-enum-member
@@ -541,7 +543,7 @@ export default [
 			// default no-unsafe-function-type
 			// default no-unsafe-member-access
 			// default no-unsafe-return
-			'@typescript-eslint/no-unsafe-type-assertion' : 'error',
+			'@typescript-eslint/no-unsafe-type-assertion' : 'warn',
 			// default no-unsafe-unary-minus
 			'@typescript-eslint/no-unused-expressions': ['error', {
 				allowShortCircuit: false,
@@ -587,7 +589,8 @@ export default [
 				array: true,
 				object: true
 			}, {
-				enforceForRenamedProperties: true,
+				// Bug: disabled to allow `item = array[i]`
+				enforceForRenamedProperties: false,
 				enforceForDeclarationWithTypeAnnotation: true
 			}],
 			'@typescript-eslint/prefer-enum-initializers' : 'off',
@@ -637,7 +640,7 @@ export default [
 				allowNullableBoolean: false,
 				allowNullableEnum: false,
 				allowNullableNumber: false,
-				allowNullableObject: false,
+				allowNullableObject: true,
 				allowNullableString: false,
 				allowNumber: false,
 				allowString: false,
@@ -672,12 +675,8 @@ export default [
 			// default no-named-as-default
 			// handled by ts
 			'import/no-named-as-default-member' : 'off',
-			'import/no-unused-modules' : [ 'warn', {
-				missingExports : true,
-				// Bug: unusedExports breaks config parsing
-				// unusedExports : true,
-				ignoreUnusedTypeExports : false,
-			}],
+			// unwanted - *all* test files are modules without exports
+			'import/no-unused-modules' : 'off',
 			/**
 			 * import module systems
 			 */
@@ -718,7 +717,8 @@ export default [
 			// handled by ts
 			'import/no-unresolved' : 'off',
 			'import/no-useless-path-segments' : [ 'error', {
-				noUselessIndex : true
+				// noUselessIndex needs to be false because index.{tj}s files can not be default resolved when enforcing extensions
+				noUselessIndex : false
 			}],
 			'import/no-webpack-loader-syntax' : 'error',
 			/**

@@ -1,4 +1,4 @@
-import { type SomeType } from './dependencies/dependencies.ts';
+import { type SomeType } from './dependencies/dependencies.js';
 
 
 export function fn() : SomeType {

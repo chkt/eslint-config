@@ -1,4 +1,4 @@
-import { deprecated, sideFx, notDefault } from './dependencies/dependencies.ts';
+import { deprecated, sideFx, notDefault } from './dependencies/dependencies.js';
 import { join } from 'node:path';
 import { readFile, open } from 'node:fs';
 import { ConfigArray, parser } from 'typescript-eslint/dist/index.js';

@@ -1,4 +1,4 @@
-import noDefault from './dependencies/defaultless.ts';
+import noDefault from './dependencies/defaultless.js';
 
 
 export function fn() : unknown {

@@ -1,4 +1,4 @@
-import { fn as bFn } from './dependencies/cycle.ts';
+import { fn as bFn } from './dependencies/cycle.js';
 
 
 export function fn() : () => unknown {

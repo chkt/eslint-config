@@ -57,6 +57,14 @@ export function preferDestructingBad(v:{ foo : number }) : number {
 	return foo;
 }
 
+export function preferDestructuringUgly(value:number[], index:number, sideFx:(v:number) => void) : number {
+	const item = value[index];
+
+	sideFx(item);
+
+	return item;
+}
+
 export function noUselessDefaultAssignmentBad({ foo = '' }:{ foo : string }) : string {
 	return foo;
 }

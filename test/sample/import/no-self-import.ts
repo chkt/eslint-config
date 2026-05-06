@@ -1,4 +1,4 @@
-import * as noSelfImport from './no-self-import.ts';
+import * as noSelfImport from './no-self-import.js';
 
 
 export function fn() : unknown {

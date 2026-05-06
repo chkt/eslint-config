@@ -33,7 +33,7 @@ export function noNewWrappersBad() : unknown {
 }
 
 export function noRequireImports(sideFx:(v:unknown) => void) : unknown {
-	const foo:unknown = require('/foo.ts');
+	const foo:unknown = require('/foo.js');
 
 	sideFx(foo);
 
